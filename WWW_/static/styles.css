@@ -1,0 +1,134 @@
+﻿#logout-panel {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#logout-panel a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+#logout-panel a:hover {
+    text-decoration: underline;
+}
+
+#navigation {
+    background-color: #333; /* Kolor tła panelu */
+    color: #fff; /* Kolor tekstu */
+    padding: 20px; /* Odstęp wewnętrzny */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    position: fixed;
+}
+
+#auth-panel {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navigation button {
+    color: #fff; /* Same color as the links */
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    font: inherit; /* Inherit font styles from the parent */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin: 0 10px; /* Margins similar to the links */
+    padding: 0; /* Remove default padding */
+}
+
+#navigation button:hover {
+    text-decoration: underline; /* Same hover effect as the links */
+}
+
+#navigation a {
+    color: #fff; /* Kolor linków */
+    text-decoration: none; /* Usunięcie podkreślenia z linków */
+    margin: 0 10px; /* Margines między linkami */
+}
+
+body {
+    background-image: url('images/laka.png');
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+}
+
+.form-container {
+    display: none;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+}
+
+#image-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 60px; /* Dodajemy margines, aby przyciski były niżej */
+}
+
+#image-buttons button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#image-buttons img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+#image-buttons img:hover {
+    transform: scale(1.1);
+}

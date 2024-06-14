@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Flowers</title>
+    <link rel="shortcut icon" type="image/png" href="static/images/logo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="navigation">
+        <div id="auth-panel">
+            <button onclick="toggleRegisterForm()">Register</button>
+            <button onclick="toggleLoginForm()">Log in</button>
+            <a href="https://rickroll.it/rickroll.mp4" onclick="rickroll(event)">Top Secret</a>
+        </div>
+    </div>
+
+    <div class="form-container" id="loginForm">
+        <a>Login</a>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="form-container" id="registerForm">
+        <a>Register</a>
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleLoginForm() {
+            var loginForm = document.getElementById('loginForm');
+            var registerForm = document.getElementById('registerForm');
+            if (loginForm.style.display === 'none' || loginForm.style.display === '') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+            }
+        }
+
+        function toggleRegisterForm() {
+            var registerForm = document.getElementById('registerForm');
+            var loginForm = document.getElementById('loginForm');
+            if (registerForm.style.display === 'none' || registerForm.style.display === '') {
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            } else {
+                registerForm.style.display = 'none';
+            }
+        }
+
+        function rickroll(event) {
+            event.preventDefault();
+            alert("You have been rickrolled!");
+            window.location.href = event.target.href;
+        }
+    </script>
+</body>
+</html>

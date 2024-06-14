@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="shortcut icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="logout-panel">
+        <span>Welcome, {{ username }}!</span>
+        <a href="{{ url_for('logout') }}">Log Out</a>
+    </div>
+    <div id="image-buttons">
+        <button onclick="alert('Flower 1 clicked!')">
+            <img src="{{ url_for('static', filename='images/flower1.jpeg') }}" alt="Flower 1">
+        </button>
+        <button onclick="alert('Flower 2 clicked!')">
+            <img src="{{ url_for('static', filename='images/flower2.jpeg') }}" alt="Flower 2">
+        </button>
+        <button onclick="alert('Flower 3 clicked!')">
+            <img src="{{ url_for('static', filename='images/flower3.jpeg') }}" alt="Flower 3">
+        </button>
+        <button onclick="alert('Flower 4 clicked!')">
+            <img src="{{ url_for('static', filename='images/flower4.jpeg') }}" alt="Flower 4">
+        </button>
+        <button onclick="alert('Flower 5 clicked!')">
+            <img src="{{ url_for('static', filename='images/flower5.png') }}" alt="Flower 5">
+        </button>
+    </div>
+</body>
+</html>
