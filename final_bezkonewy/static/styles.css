@@ -1,0 +1,323 @@
+﻿body {
+    background-image: url('images/laka2.png');
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-size: cover;
+}
+
+#top-panel {
+    background-color: #328a3c;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.button-container a {
+    color: #fff; 
+    text-decoration: none; 
+    display: block;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+#loginForm, #registerForm {
+    display: none; 
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Dokładne wyśrodkowanie */
+    background-color: #b6ed6d;
+    padding: 30px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 500;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-container input {
+    display: block;
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container button {
+    width: calc(100% - 40px);
+    padding: 10px;
+    background-color: #328a3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 100%;
+}
+
+.form-container button:hover {
+    background-color: #555;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#ogrodnik-img {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    max-width: 20%; /* Obraz nie będzie szerszy niż 20% jego kontenera */
+    height: auto; /* Automatyczna wysokość w proporcji do szerokości */
+    z-index: 100;
+}
+
+
+.hidden {
+    display: none;
+}
+
+#toggle-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#toggle-button:hover {
+    background-color: #45a049;
+}
+
+#content {
+    margin-top: 60px; /* Ensure content is below the top panel */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flower-info {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #328a3c;
+    border: none;
+    border-radius: 10px;
+}
+
+/*from home.html*/
+
+.chosen {
+    border: 2px solid green;
+}
+
+.button:hover {
+    background-color: #3e8e41;
+}
+
+.button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
+
+#image-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+    #image-buttons a {
+        display: block;
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s, transform 0.3s ease;
+        border-radius: 70%;
+        border: 3px solid #ddd;
+    }
+
+        #image-buttons a:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.1);
+            border-color: #aaa; /* Zmiana koloru ramki po najechaniu */
+        }
+
+    #image-buttons img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+.flower-info {
+    display: none;
+    margin: 20px 0;
+}
+
+    .flower-info h2 {
+        margin: 10px 0;
+    }
+
+.button {
+    display: inline-block;
+    padding: 20px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+    margin: 10px;
+}
+
+    .button:hover {
+        background-color: #3e8e41;
+    }
+
+    .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 3px #666;
+        transform: translateY(4px);
+    }
+
+#garden ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#garden li {
+    margin: 5px 0;
+}
+
+/*garden.html*/
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px #999;
+}
+
+    .modal-button.no {
+        background-color: #f44336;
+    }
+
+    .modal-button:hover {
+        background-color: #3e8e41;
+    }
+
+    .modal-button.no:hover {
+        background-color: #d32f2f;
+    }
+
+    .modal-button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 3px #666;
+        transform: translateY(4px);
+    }
+
+    .modal-button.no:active {
+        background-color: #d32f2f;
+        box-shadow: 0 2px #666;
+        transform: translateY(4px);
+    }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
+    grid-template-rows: repeat(5, 1fr); /* Adjust the number of rows as needed */
+    width: 92%;
+    height: 95%;
+    gap: 0;
+}
+
+.grid-item {
+    border: 1px solid black; /* Only the outline of the cells */
+    background-color: transparent; /* Transparent background */
+    cursor: pointer; /* Make the cells clickable */
+    position: relative;
+    overflow: hidden; /* Ensure images don't overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Ensure the image is contained within the grid item */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }

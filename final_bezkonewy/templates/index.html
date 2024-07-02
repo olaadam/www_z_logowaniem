@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Flowers</title>
+    <link rel="shortcut icon" type="image/png" href="static/images/logo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        {% if error_message %}
+            alert("{{ error_message }}");
+        {% endif %}
+    </script>
+</head>
+<body>
+    <img id="ogrodnik-img" src="{{ url_for('static', filename='images/ogrodnik2.png') }}" alt="Ogrodnik">
+    <div id="top-panel">
+        <div class="button-container">
+            <a href="#" onclick="toggleRegisterForm()">Register</a>
+        </div>
+        <div class="button-container">
+            <a href="#" onclick="toggleLoginForm()">Log in</a>
+        </div>
+
+    </div>
+
+    <div class="form-container" id="loginForm">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="form-container" id="registerForm">
+        <h2>Register</h2>
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleLoginForm() {
+            var loginForm = document.getElementById('loginForm');
+            var registerForm = document.getElementById('registerForm');
+            if (loginForm.style.display === 'none' || loginForm.style.display === '') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+            }
+        }
+
+        function toggleRegisterForm() {
+            var registerForm = document.getElementById('registerForm');
+            var loginForm = document.getElementById('loginForm');
+            if (registerForm.style.display === 'none' || registerForm.style.display === '') {
+                registerForm.style.display = 'block';
+                loginForm.style.display = 'none';
+            } else {
+                registerForm.style.display = 'none';
+            }
+        }
+
+    </script>
+</body>
+</html>

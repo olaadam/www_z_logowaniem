@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="static/images/logo.png">
+    <title>Garden</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/ogrod.png') }}");
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 3px #999;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="button-container">
+            <a href="{{ url_for('home') }}" class="button">Get Back</a>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        {% for i in range(50) %}
+        <div class="grid-item {% if i in assigned_positions %}assigned{% endif %}" onclick="assignField({{ i }}, '{{ assigned_positions.get(i).user.username if i in assigned_positions else '' }}')">
+            {% if i in assigned_positions %}
+            <img src="{{ url_for('static', filename='images/flower' ~ assigned_positions[i].name.split(' ')[1] ~ '.png') }}" alt="Flower">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p id="modal-text"></p>
+            <button class="modal-button yes" onclick="confirmAssignment()">Yes</button>
+            <button class="modal-button no" onclick="closeModal()">No</button>
+        </div>
+    </div>
+
+    <form id="assign-form" method="post" style="display:none;">
+        <input type="hidden" name="position" id="position-input">
+    </form>
+
+    <script>
+        var userAssignedPosition = {{ user_assigned_position if user_assigned_position is not none else 'null' }};
+        var selectedPosition;
+
+        function assignField(position, assignedUser) {
+            if (assignedUser) {
+                alert(assignedUser + ' already planted something here!');
+            } else if (userAssignedPosition !== null) {
+                alert('You have already planted your flower');
+            } else {
+                selectedPosition = position;
+                document.getElementById('modal-text').textContent = 'Plant your flower here?';
+                document.getElementById('modal').style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function confirmAssignment() {
+            var form = document.getElementById('assign-form');
+            var input = document.getElementById('position-input');
+            input.value = selectedPosition;
+            form.action = '/assign_field/' + selectedPosition;
+            form.submit();
+        }
+
+    </script>
+</body>
+</html>
