@@ -7,7 +7,116 @@
     <link rel="shortcut icon" type="image/png" href="static/images/logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        .chosen {
+            border: 2px solid green;
+        }
 
+        .button:hover {
+            background-color: #3e8e41;
+        }
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 2px #666;
+            transform: translateY(4px);
+        }
+
+        #image-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+            #image-buttons a {
+                display: block;
+                width: 200px;
+                height: 200px;
+                margin: 10px;
+                background-color: white;
+                padding: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: box-shadow 0.3s, transform 0.3s ease;
+                border-radius: 70%;
+                border: 3px solid #ddd;
+            }
+
+                #image-buttons a:hover {
+                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                    transform: scale(1.1);
+                    border-color: #aaa; /* Zmiana koloru ramki po najechaniu */
+                }
+
+            #image-buttons img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                cursor: pointer;
+            }
+
+        .flower-info {
+            display: none;
+            margin: 20px 0;
+        }
+
+            .flower-info h2 {
+                margin: 10px 0;
+            }
+
+        .button {
+            display: inline-block;
+            padding: 20px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            color: #fff;
+            background-color: #4CAF50;
+            border-radius: 15px;
+            box-shadow: 0 2px #999;
+            margin: 10px;
+        }
+
+            .button:hover {
+                background-color: #3e8e41;
+            }
+
+            .button:active {
+                background-color: #3e8e41;
+                box-shadow: 0 3px #666;
+                transform: translateY(4px);
+            }
+
+        #garden ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #garden li {
+            margin: 5px 0;
+        }
+
+        /* Stylowanie alertów */
+        .flashes {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .flashes li {
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #d9534f; /* Czerwone tło */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: flash-animation 0.5s ease-in-out;
+        }
+
+        /* Animacja */
+        @keyframes flash-animation {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -17,6 +126,9 @@
         </div>
         <div class="button-container">
             <a href="{{ url_for('logout') }}">Log Out</a>
+        </div>
+        <div class="button-container">
+            <a href="#" onclick="confirmDeleteAccount()">Delete Account</a>
         </div>
         <div class="button-container">
             <a href="https://www.morizon.pl/blog/rosliny-ogrodowe-17-gatunkow/" onclick="kwiatek(event)">Top Secret</a>
@@ -77,20 +189,6 @@
         <a href="{{ url_for('garden') }}" class="button">Visit the Garden</a>
         {% endif %}
     </div>
-    <div id="top-panel">
-        <div class="button-container">
-            <span>Welcome, {{ username }}!</span>
-        </div>
-        <div class="button-container">
-            <a href="{{ url_for('logout') }}">Log Out</a>
-        </div>
-        <div class="button-container">
-            <a href="#" onclick="confirmDeleteAccount()">Delete Account</a>
-        </div>
-        <div class="button-container">
-            <a href="https://www.morizon.pl/blog/rosliny-ogrodowe-17-gatunkow/" onclick="kwiatek(event)">Top Secret</a>
-        </div>
-    </div>
 
     <script>
         function showFlowerInfo(flowerId) {
@@ -125,4 +223,3 @@
     </script>
 </body>
 </html>
-
