@@ -3,113 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Plant Flowers</title>
     <link rel="shortcut icon" type="image/png" href="static/images/logo.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
 </head>
 <body>
+    <img id="ogrodnik-img" src="{{ url_for('static', filename='images/ogrodnik2.png') }}" alt="Gardener">
+    <div class="speech-bubble" id="greeting-bubble">
+        <span id="greeting-text"></span>
+    </div>
     <div id="top-panel">
         <div class="button-container">
-            <span>Welcome, {{ username }}!</span>
+            <a href="#" onclick="toggleRegisterForm()">Register</a>
         </div>
         <div class="button-container">
-            <a href="{{ url_for('logout') }}">Log Out</a>
-        </div>
-        <div class="button-container">
-            <a href="#" onclick="confirmDeleteAccount()">Delete Account</a>
-        </div>
-        <div class="button-container">
-            <a href="https://www.morizon.pl/blog/rosliny-ogrodowe-17-gatunkow/" onclick="kwiatek(event)">Top Secret</a>
+            <a href="#" onclick="toggleLoginForm()">Log in</a>
         </div>
     </div>
 
-    <div id="content" class="centered">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul class="flashes">
-            {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
+    <div class="form-container" id="loginForm">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div id="login-alert" class="alert"></div>
+    </div>
 
-        <div id="image-buttons" class="centered">
-            <a href="javascript:void(0);" onclick="showFlowerInfo(1)">
-                <img src="{{ url_for('static', filename='images/flower1.png') }}" alt="Flower 1">
-            </a>
-            <a href="javascript:void(0);" onclick="showFlowerInfo(2)">
-                <img src="{{ url_for('static', filename='images/flower2.png') }}" alt="Flower 2">
-            </a>
-            <a href="javascript:void(0);" onclick="showFlowerInfo(3)">
-                <img src="{{ url_for('static', filename='images/flower3.png') }}" alt="Flower 3">
-            </a>
-            <a href="javascript:void(0);" onclick="showFlowerInfo(4)">
-                <img src="{{ url_for('static', filename='images/flower4.png') }}" alt="Flower 4">
-            </a>
-            <a href="javascript:void(0);" onclick="showFlowerInfo(            5)">
-                <img src="{{ url_for('static', filename='images/flower5.png') }}" alt="Flower 5">
-            </a>
-        </div>
-
-        <div id="flower-info-1" class="flower-info">
-            <h2>Violet Bliss</h2>
-            <a href="{{ url_for('plant_flower', flower_id=1) }}" class="button">Choose This Flower</a>
-        </div>
-        <div id="flower-info-2" class="flower-info">
-            <h2>Kaktus</h2>
-            <a href="{{ url_for('plant_flower', flower_id=2) }}" class="button">Choose This Flower</a>
-        </div>
-        <div id="flower-info-3" class="flower-info">
-            <h2>Ruby Dancer</h2>
-            <a href="{{ url_for('plant_flower', flower_id=3) }}" class="button">Choose This Flower</a>
-        </div>
-        <div id="flower-info-4" class="flower-info">
-            <h2>Sunrise Splendor</h2>
-            <a href="{{ url_for('plant_flower', flower_id=4) }}" class="button">Choose This Flower</a>
-        </div>
-        <div id="flower-info-5" class="flower-info">
-            <h2>Bluebell Harmony</h2>
-            <a href="{{ url_for('plant_flower', flower_id=5) }}" class="button">Choose This Flower</a>
-        </div>
-
-        {% if user_flowers|length > 0 %}
-        <a href="{{ url_for('garden') }}" class="button">Visit the Garden</a>
-        {% endif %}
+    <div class="form-container" id="registerForm">
+        <h2>Register</h2>
+        <form action="/register" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Register</button>
+        </form>
+        <div id="register-alert" class="alert"></div>
     </div>
 
     <script>
-        function showFlowerInfo(flowerId) {
-            // Hide all flower info divs
-            var flowerInfos = document.querySelectorAll('.flower-info');
-            flowerInfos.forEach(function (info) {
-                info.style.display = 'none';
-            });
+        function toggleLoginForm() {
+            var loginForm = document.getElementById('loginForm');
+            var registerForm = document.getElementById('registerForm');
+            loginForm.style.display = (loginForm.style.display === 'none' || loginForm.style.display === '') ? 'block' : 'none';
+            registerForm.style.display = 'none';
+        }
 
-            // Show the selected flower info
-            var selectedFlowerInfo = document.getElementById('flower-info-' + flowerId);
-            if (selectedFlowerInfo.style.display === 'block') {
-                selectedFlowerInfo.style.display = 'none';
-            } else {
-                selectedFlowerInfo.style.display = 'block';
+        function toggleRegisterForm() {
+            var registerForm = document.getElementById('registerForm');
+            var loginForm = document.getElementById('loginForm');
+            registerForm.style.display = (registerForm.style.display === 'none' || registerForm.style.display === '') ? 'block' : 'none';
+            loginForm.style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var errorMessage = "{{ error_message }}";
+            if (errorMessage && errorMessage !== 'None') {
+                if (window.location.pathname.includes('register')) {
+                    var alertBox = document.getElementById('register-alert');
+                    alertBox.textContent = errorMessage;
+                    alertBox.classList.add('show');
+                    toggleRegisterForm();
+                } else {
+                    var alertBox = document.getElementById('login-alert');
+                    alertBox.textContent = errorMessage;
+                    alertBox.classList.add('show');
+                    toggleLoginForm();
+                }
             }
-        }
 
-        // Ensure the script is loaded
-        console.log('Script loaded successfully.');
+            var ogrodnikImg = document.getElementById('ogrodnik-img');
+            var greetingBubble = document.getElementById('greeting-bubble');
+            var greetingText = document.getElementById('greeting-text');
 
-        function kwiatek(event) {
-            event.preventDefault();
-            alert(":)");
-            window.location.href = event.target.href;
-        }
-        function confirmDeleteAccount() {
-        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-            window.location.href = "{{ url_for('delete_account') }}";
-        }
-    }
+            ogrodnikImg.addEventListener('click', function() {
+                var languages = ['Witaj!', 'Hello!', 'Bonjour!', '¡Hola!', 'Ciao!', 'Hallo!', '你好!', 'Ahoj!'];
+                var randomIndex = Math.floor(Math.random() * languages.length);
+                var greeting = languages[randomIndex];
+
+                greetingText.textContent = greeting;
+                greetingBubble.classList.add('show');
+
+                // Remove bubble after 3 seconds
+                setTimeout(function() {
+                    greetingBubble.classList.remove('show');
+                }, 5000);
+            });
+        });
     </script>
-</body>
+    </body>
 </html>
-
